@@ -13,5 +13,5 @@ clock = pygame.time.Clock()
 fps = 60
 
 black = (0, 0, 0)
-blue = (0, 14, ,71)
+blue = (0, 14, 71)
 white = (255, 255, 255)
