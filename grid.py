@@ -36,12 +36,33 @@ class Grid():
         for x in range(self.rows):
             for y in range(self.columns):
                 state = self.grid_array[x][y]
-                neighbours = self.get_neighbours(x, y)
-                if (state == 0 and neighbours == 3):
+                neighbors = self.get_neighbors(x, y)
+                if (state == 0 and neighbors == 3):
                     next[x][y] = 1
-                elif (state == 1 and (neighbours < 2 or neighbours > 3)):
+                elif (state == 1 and (neighbors < 2 or neighbors > 3)):
                     next[x][y] = 0
                 else:
                     next[x][y] = state
 
         self.grid_array = next
+
+    # Get cells neighbors
+    def get_neighbors(self, x, y):
+        total = 0
+        for i in range(x - 1, x + 2):
+            for j in range(y - 1, y + 2):
+                if (i < 0 or i >= self.rows) or (j < 0 or j >= self.columns):
+                    pass
+                else:
+                    total += self.grid_array[i][j]
+        total -= self.grid_array[x][y]
+        
+        # Alternative solution (does not compute neighbors correctly)
+        # for i in range(-1, 2):
+        #     for j in range(-1, 2):
+        #         x_edge = (x + i + self.rows) % self.rows
+        #         y_edge = (y + j + self.columns) % self.columns
+        #         total += self.grid_array[x_edge][y_edge]
+
+        total -= self.grid_array[x][y]
+        return total
