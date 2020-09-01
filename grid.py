@@ -6,9 +6,9 @@ class Grid():
     # Initializer
     def __init__(self, width, height, scale, offset):
         self.scale = scale
-        self.columns = int(height / 2)
-        self.rows = int(width / 2)
-        self.size(self.rows, self.columns)
+        self.columns = int(height / scale)
+        self.rows = int(width / scale)
+        self.size = (self.rows, self.columns)
         self.grid_array = np.ndarray(shape=(self.size))
         self.offest = offset
 
@@ -56,13 +56,5 @@ class Grid():
                 else:
                     total += self.grid_array[i][j]
         total -= self.grid_array[x][y]
-        
-        # Alternative solution (does not compute neighbors correctly)
-        # for i in range(-1, 2):
-        #     for j in range(-1, 2):
-        #         x_edge = (x + i + self.rows) % self.rows
-        #         y_edge = (y + j + self.columns) % self.columns
-        #         total += self.grid_array[x_edge][y_edge]
 
-        total -= self.grid_array[x][y]
         return total
